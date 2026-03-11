@@ -1,0 +1,2306 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cuestionario La Odisea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f2e8;
+      --bg2: #efe8d5;
+      --card: #fdf8ef;
+      --text: #2c1e0f;
+      --muted: #7a6248;
+      --primary: #8b4513;
+      --primary-600: #6b3410;
+      --accent: #c8860a;
+      --accent-light: #f5e4b8;
+      --gold: #d4a017;
+      --gold-dark: #a87c10;
+      --border: #d4b896;
+      --border-dark: #b8956a;
+      --success: #3a6b2a;
+      --danger: #8b1a1a;
+      --shadow: 0 8px 32px rgba(80, 40, 0, 0.13);
+      --shadow-card: 0 4px 16px rgba(80, 40, 0, 0.10);
+      --wave: #b8956a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 20% 80%, rgba(200,134,10,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 10%, rgba(139,69,19,0.06) 0%, transparent 55%);
+      color: var(--text);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* ── GREEK KEY BORDER ── */
+    .greek-key {
+      height: 12px;
+      background-color: var(--gold);
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 8px,
+        var(--gold-dark) 8px, var(--gold-dark) 10px,
+        transparent 10px, transparent 18px,
+        var(--gold-dark) 18px, var(--gold-dark) 20px
+      );
+      opacity: 0.85;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(18,10,4,0.82) 0%, rgba(60,30,5,0.78) 60%, rgba(100,55,10,0.55) 100%),
+        url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Odysseus_at_sea.jpg/1280px-Odysseus_at_sea.jpg") center/cover no-repeat;
+      color: #f5e4b8;
+      padding: 28px 16px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜";
+      position: absolute;
+      bottom: 12px;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 1.1rem;
+      color: rgba(212,160,23,0.35);
+      letter-spacing: 3px;
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      text-align: left;
+    }
+    .hero-left {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-right { flex: 1; }
+
+    .hero-emblem {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 2px 8px rgba(212,160,23,0.5));
+    }
+
+    .tag {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-family: "Cinzel", serif;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin-top: 4px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+      letter-spacing: 0.04em;
+      color: #fdf0d0;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+      font-family: "EB Garamond", serif;
+      font-size: 0.85em;
+    }
+    .subtitle {
+      margin-top: 6px;
+      color: #e8d5aa;
+      max-width: 600px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; justify-content: flex-start; }
+    .hero-meta span {
+      background: rgba(212,160,23,0.18);
+      border: 1px solid rgba(212,160,23,0.45);
+      padding: 4px 14px;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.08em;
+      color: #f5e4b8;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto 56px;
+      padding: 32px 16px 0;
+      display: grid;
+      gap: 24px;
+    }
+
+    /* ── PANELS ── */
+    .panel {
+      background: var(--card);
+      border-radius: 4px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+    .panel::before {
+      content: "";
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--accent), var(--gold), var(--gold-dark));
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--bg2);
+    }
+    .panel-header h2 {
+      font-family: "Cinzel", serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+    .panel-body { padding: 22px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+    }
+    .field label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: block;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .field select {
+      margin-top: 6px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 3px;
+      border: 1px solid var(--border-dark);
+      background: #fdf6e3;
+      font-size: 0.95rem;
+      font-family: "EB Garamond", serif;
+      color: var(--text);
+      appearance: auto;
+    }
+    .field select:focus { outline: 2px solid var(--gold); }
+
+    /* ── QUESTION ── */
+    .question { display: grid; gap: 16px; }
+    .question h3 {
+      font-size: 1.15rem;
+      line-height: 1.65;
+      font-family: "EB Garamond", serif;
+      color: var(--text);
+    }
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.05em;
+    }
+    .meta span { background: var(--accent-light); padding: 2px 9px; border-radius: 2px; border: 1px solid var(--border); }
+    .options { display: grid; gap: 10px; }
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 15px;
+      border: 1px solid var(--border-dark);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      font-size: 1rem;
+      font-family: "EB Garamond", serif;
+      background: #fdf6e3;
+    }
+    .option:hover { border-color: var(--gold); background: var(--accent-light); }
+    .input-answer {
+      padding: 10px 13px;
+      border-radius: 3px;
+      border: 1px solid var(--border-dark);
+      font-size: 1rem;
+      width: 100%;
+      max-width: 420px;
+      font-family: "EB Garamond", serif;
+      background: #fdf6e3;
+      color: var(--text);
+    }
+    .input-answer:focus { outline: 2px solid var(--gold); }
+
+    /* ── PROGRESS ── */
+    .progress { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 0.82rem; font-family: "Cinzel", serif; }
+    .progress-bar { width: 130px; height: 5px; border-radius: 999px; background: var(--border); overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold)); width: 0%; transition: width .35s; }
+
+    /* ── BUTTONS ── */
+    .actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+    button {
+      padding: 9px 20px;
+      border-radius: 3px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.05em;
+      transition: background .2s, color .2s, transform .1s;
+    }
+    button:active { transform: scale(0.97); }
+    .primary { background: var(--primary); color: #fdf0d0; border: 1px solid var(--primary-600); }
+    .primary:hover { background: var(--primary-600); }
+    .secondary { background: var(--accent-light); color: var(--gold-dark); border: 1px solid var(--gold); }
+    .secondary:hover { background: #edd89a; }
+    .ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-dark); }
+    .ghost:hover { background: var(--bg2); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── FEEDBACK ── */
+    .feedback {
+      margin-top: 18px;
+      padding: 15px 18px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      display: none;
+      line-height: 1.75;
+      font-family: "EB Garamond", serif;
+      font-size: 1rem;
+    }
+    .feedback.success {
+      border-color: #7dba6a;
+      background: #edf7e8;
+      color: var(--success);
+      display: block;
+    }
+    .feedback.error {
+      border-color: #e0a0a0;
+      background: #fdf0f0;
+      color: var(--danger);
+      display: block;
+    }
+    .feedback strong { font-family: "Cinzel", serif; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .feedback small { display: block; margin-top: 6px; opacity: .88; font-style: italic; }
+
+    /* ── SUMMARY ── */
+    #summary .panel-body { display: grid; gap: 20px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; align-items: start; }
+    .label { font-size: 0.76rem; color: var(--muted); margin-bottom: 6px; font-family: "Cinzel", serif; text-transform: uppercase; letter-spacing: 0.08em; }
+    .score { font-size: 2.4rem; font-weight: 700; color: var(--primary); font-family: "Cinzel", serif; }
+    .weak-list { padding-left: 18px; font-size: 0.95rem; }
+    .weak-list li { margin-bottom: 5px; }
+    .recommendations { padding-left: 18px; font-size: 0.92rem; line-height: 1.9; font-style: italic; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      color: var(--gold);
+      letter-spacing: 6px;
+      font-size: 1rem;
+      margin: 4px 0 12px;
+      opacity: 0.6;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 20px 14px 18px; }
+      .hero-content { flex-direction: column; text-align: center; gap: 10px; }
+      .hero-left { flex-direction: row; gap: 10px; align-items: center; }
+      .hero-meta { justify-content: center; }
+      .hero-emblem { font-size: 1.8rem; margin-bottom: 6px; }
+      .hero h1 { font-size: 1.5rem; }
+      .subtitle { font-size: 0.88rem; margin-top: 8px; }
+      .hero-meta { margin-top: 12px; gap: 7px; }
+      .hero-meta span { font-size: 0.7rem; padding: 3px 10px; }
+      .tag { font-size: 0.65rem; }
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.06em;
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .footer em { font-family: "EB Garamond", serif; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<div class="greek-key"></div>
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <span class="hero-emblem">⚓️</span>
+      <p class="tag" style="text-align:center; letter-spacing:0.1em;">Homero<br>✷<br>Grecia<br>Antigua</p>
+    </div>
+    <div class="hero-right">
+      <h1>LA ODISEA<br><em>Cuestionario por Cantos</em></h1>
+      <p class="subtitle">«Háblame, Musa, del héroe de multiforme ingenio...» — Práctica guiada con retroalimentación inmediata sobre los 24 cantos del poema épico de Homero.</p>
+      <div class="hero-meta">
+        <span>24 Cantos</span>
+        <span>Personajes</span>
+        <span>Dioses</span>
+        <span>Trama</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="greek-key"></div>
+<main class="container">
+
+  <!-- CONFIG -->
+  <section class="panel" aria-labelledby="config-title">
+    <div class="panel-header">
+      <h2 id="config-title">‘★’ Configurar práctica</h2>
+      <button id="shuffleBtn" class="ghost">Mezclar preguntas</button>
+    </div>
+    <div class="panel-body grid">
+      <div class="field">
+        <label for="cantoSelect">Canto</label>
+        <select id="cantoSelect">
+          <option value="all">Todos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="topicSelect">Tema</label>
+        <select id="topicSelect">
+          <option value="all">Todos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="countSelect">Cantidad</label>
+        <select id="countSelect">
+          <option value="all">Todas</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="difficultySelect">Dificultad</label>
+        <select id="difficultySelect">
+          <option value="all">Todas</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" aria-labelledby="quiz-title">
+    <div class="panel-header">
+      <h2 id="quiz-title">‘❡’ Preguntas del Poema</h2>
+      <div class="progress" aria-live="polite">
+        <span id="progressText">Pregunta 1 de 1</span>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <article id="questionCard" class="question"></article>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+      <div class="actions">
+        <button id="checkBtn" class="primary">Revisar respuesta</button>
+        <button id="nextBtn" class="secondary" disabled>Siguiente</button>
+        <button id="showBtn" class="ghost">Ver respuesta</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="panel" aria-labelledby="summary-title" id="summary" hidden>
+    <div class="panel-header">
+      <h2 id="summary-title">‘☆’ Resumen Final</h2>
+      <button id="restartBtn" class="primary">Reiniciar práctica</button>
+    </div>
+    <div class="panel-body">
+      <div class="summary-grid">
+        <div>
+          <p class="label">Puntaje</p>
+          <p id="scoreText" class="score">0/0</p>
+        </div>
+        <div>
+          <p class="label">Temas a reforzar</p>
+          <ul id="weakTopics" class="weak-list"></ul>
+        </div>
+      </div>
+      <div>
+        <h3>Recomendaciones</h3>
+        <ul class="recommendations">
+        <li>Relee los cantos donde fallaste prestando atención a los nombres y roles de los dioses.</li>
+          <li>Anota los epítetos recurrentes de cada personaje (ej. «de ojos de lechuza» → Atenea).</li>
+          <li>Relaciona cada canto con el viaje de Odiseo: Telemaquia → cantos I–IV; Aventuras → V–XII; Regreso → XIII–XXIV.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="divider">――― ⚝ ―――</p>
+  <p><em>Hecho para repasar La Odisea de Homero.</em><br>Cada respuesta incluye explicación y contexto épico.</p>
+</footer>
+
+<script>
+const QUESTION_BANK = [
+
+  // ════════════════════════════
+  //        CANTO I
+  // ════════════════════════════
+
+  // ── APERTURA DEL POEMA ──
+  {
+    id: 1,
+    canto: "I",
+    topic: "Apertura del Poema",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿A quién invoca el narrador al comienzo de La Odisea para que le cuente la historia?",
+    answer: ["la musa", "musa"],
+    answerText: "La Musa",
+    explanation: "El poema abre con 'Háblame, Musa…'. La invocación a la Musa es un recurso épico clásico (in medias res), presente también en la Ilíada."
+  },
+  {
+    id: 2,
+    canto: "I",
+    topic: "Apertura del Poema",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué ciudad destruyó Odiseo antes de comenzar su largo peregrinaje por el mar?",
+    choices: ["Atenas", "Esparta", "Troya", "Cartago"],
+    answer: 2,
+    explanation: "La Odisea arranca justo al terminar la Guerra de Troya. Odiseo es uno de los héroes aqueos que destruyó Troya y luego pasó años intentando volver a Ítaca."
+  },
+  {
+    id: 3,
+    canto: "I",
+    topic: "Apertura del Poema",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "Según el Canto I, todos los compañeros de Odiseo lograron regresar sanos y salvos a su patria.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. El narrador dice que los compañeros 'perecieron por sus propias locuras', pues se comieron las vacas de Helios, lo que les impidió el regreso."
+  },
+  {
+    id: 4,
+    canto: "I",
+    topic: "Apertura del Poema",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿De quién eran las vacas que comieron los compañeros de Odiseo, provocando su perdición?",
+    choices: ["Zeus", "Ares", "Helios", "Poseidón"],
+    answer: 2,
+    explanation: "Los compañeros se comieron las vacas de Helios (el dios sol, hijo de Hiperión), lo que enfureció al dios y les impidió regresar a casa."
+  },
+  // ── SITUACIÓN DE ODISEO ──
+  {
+    id: 5,
+    canto: "I",
+    topic: "Situación de Odiseo",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llama la ninfa que retenía a Odiseo en su isla al inicio del poema?",
+    answer: ["calipso"],
+    answerText: "Calipso",
+    explanation: "Calipso, descrita como 'la ninfa veneranda, la divina entre las deidades', retenía a Odiseo en su cueva con el deseo de hacerlo su esposo."
+  },
+  {
+    id: 6,
+    canto: "I",
+    topic: "Situación de Odiseo",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cuál es la patria a la que Odiseo desea regresar durante todo el poema?",
+    choices: ["Esparta", "Micenas", "Ítaca", "Corinto"],
+    answer: 2,
+    explanation: "Ítaca es la isla-reino de Odiseo. Allí lo esperan su esposa Penélope, su hijo Telémaco y su anciano padre Laertes."
+  },
+  {
+    id: 7,
+    canto: "I",
+    topic: "Situación de Odiseo",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "Al comienzo del Canto I, todos los dioses del Olimpo compadecían a Odiseo por igual.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. Poseidón permanecía 'constantemente irritado contra el divinal Odiseo' y era la excepción entre los dioses que sí lo compadecían."
+  },
+  // ── EL CONCILIO DE LOS DIOSES ──
+  {
+    id: 8,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Adónde había viajado Poseidón cuando los demás dioses se reunieron en el Olimpo?",
+    choices: ["A Troya", "A Ítaca", "Al pueblo de los etíopes", "Al fondo del mar"],
+    answer: 2,
+    explanation: "Poseidón fue al lejano pueblo de los etíopes a asistir a una hecatombe (sacrificio masivo) de toros y corderos, por eso no estaba en el concilio."
+  },
+  {
+    id: 9,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Quién fue el primer tema mencionado por Zeus en el concilio de los dioses, como ejemplo de hombre que actuó por sus propias locuras?",
+    answer: ["egisto"],
+    answerText: "Egisto",
+    explanation: "Zeus menciona a Egisto, quien casó con la esposa del rey Agamenón y lo mató a pesar de haber sido advertido por Hermes. Orestes luego tomó venganza."
+  },
+  {
+    id: 10,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Quién tomó venganza por la muerte de Agamenón matando a Egisto?",
+    choices: ["Odiseo", "Telémaco", "Orestes", "Menelao"],
+    answer: 2,
+    explanation: "Orestes Agamenonida mató a Egisto. Zeus lo menciona como ejemplo de cómo los mortales sufren las consecuencias de sus propias malas decisiones."
+  },
+  {
+    id: 11,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Por qué razón específica guardaba Poseidón rencor a Odiseo?",
+    choices: [
+      "Porque Odiseo robó el fuego sagrado",
+      "Porque Odiseo cegó al ciclope Polifemo, hijo de Poseidón",
+      "Porque Odiseo insultó al mar en Troya",
+      "Porque Odiseo no le ofreció sacrificios suficientes"
+    ],
+    answer: 1,
+    explanation: "Polifemo era hijo de Poseidón y la ninfa Toosa. Odiseo lo cegó para escapar de su cueva, lo que desató la ira del dios del mar contra él."
+  },
+  {
+    id: 12,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "difícil",
+    type: "input",
+    prompt: "¿Quiénes son los padres del ciclope Polifemo, según Zeus en el Canto I?",
+    answer: ["poseidón y toosa", "toosa y poseidón"],
+    answerText: "Poseidón y la ninfa Toosa",
+    explanation: "Zeus explica que Polifemo 'nació de la ninfa Toosa, hija de Forcis, que impera en el mar estéril, después que esta se unió con Poseidón en honda cueva'."
+  },
+  {
+    id: 13,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "En el concilio, Atenea propone que Hermes vaya a la isla de Calipso a comunicarle la decisión de los dioses.",
+    choices: ["Verdadero", "Falso"],
+    answer: 0,
+    explanation: "Verdadero. Atenea propone enviar a Hermes como mensajero a Calipso, mientras ella misma va a Ítaca para instigar a Telémaco."
+  },
+  // ── ATENEA Y TELÉMACO ──
+  {
+    id: 14,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Qué disfraz adoptó Atenea para visitar a Telémaco en Ítaca?",
+    answer: ["mentes", "mentes rey de los tafios"],
+    answerText: "Mentes, rey de los tafios",
+    explanation: "Atenea tomó la figura de Mentes, rey de los tafios, un antiguo amigo de la familia de Odiseo, para no ser reconocida."
+  },
+  {
+    id: 15,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué hacían los pretendientes cuando Atenea (disfrazada de Mentes) llegó al palacio?",
+    choices: [
+      "Bebían y escuchaban a Femio cantar",
+      "Jugaban a los dados ante la puerta",
+      "Dormían en el salón principal",
+      "Disputaban por las riquezas de Odiseo"
+    ],
+    answer: 1,
+    explanation: "El texto dice que los pretendientes 'jugaban a los dados ante la puerta de la casa, sentados sobre cueros de bueyes que ellos mismos habían degollado'."
+  },
+  {
+    id: 16,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Quién fue el primero en advertir la llegada de Atenea disfrazada al palacio?",
+    choices: ["Penélope", "Un heraldo", "Telémaco", "Femio el aedo"],
+    answer: 2,
+    explanation: "El texto dice: 'Fue el primero en advertir la presencia de la diosa el deiforme Telémaco', quien estaba pensando en su padre ausente."
+  },
+  {
+    id: 17,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llama el aedo (cantor) que los pretendientes obligan a cantar para su entretenimiento?",
+    answer: ["femio"],
+    answerText: "Femio",
+    explanation: "Femio era el aedo o poeta cantor del palacio. Un heraldo le puso la cítara en las manos y era obligado a cantar ante los pretendientes."
+  },
+  {
+    id: 18,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Adónde planea llevar Atenea a Telémaco para buscar noticias sobre su padre?",
+    choices: ["A Troya", "A la arenosa Pilos", "Al Olimpo", "A Creta"],
+    answer: 1,
+    explanation: "Atenea dice que llevará a Telémaco 'a la arenosa Pilos' para que, preguntando y viendo, pueda adquirir noticias de su padre Odiseo."
+  },
+  {
+    id: 19,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "difícil",
+    type: "truefalse",
+    prompt: "Telémaco afirma con certeza ser hijo de Odiseo cuando Atenea (como Mentes) se lo pregunta.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. Telémaco responde con duda: 'Mi madre afirma que soy hijo de aquél, y no sé más; que nadie consiguió conocer por sí su propio linaje'."
+  },
+  {
+    id: 20,
+    canto: "I",
+    topic: "Atenea y Telémaco",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué acción concreta recomienda Atenea (disfrazada) a Telémaco para enfrentar la situación con los pretendientes?",
+    choices: [
+      "Pedirle ayuda a Menelao directamente",
+      "Convocar a los aqueos en el ágora y prohibir la entrada a los pretendientes",
+      "Huir de Ítaca hasta que Odiseo regrese",
+      "Casarse rápidamente para liberar a su madre"
+    ],
+    answer: 1,
+    explanation: "Atenea le dice: 'Mañana convoca en el ágora a los héroes aqueos, háblales a todos… Intima a los pretendientes que se vayan a sus casas'."
+  },
+  {
+    id: 21,
+    canto: "I",
+    topic: "Personajes y Epítetos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "El epíteto 'de ojos de lechuza' es usado repetidamente en el Canto I para referirse a…",
+    choices: ["Calipso", "Penélope", "Atenea", "La Musa"],
+    answer: 2,
+    explanation: "Atenea recibe constantemente el epíteto 'de ojos de lechuza' (glaucopis en griego). Los epítetos son adjetivos fijos asociados a cada personaje en la épica homérica."
+  },
+  {
+    id: 22,
+    canto: "I",
+    topic: "Personajes y Epítetos",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Qué epíteto memorable usa el narrador para describir la inteligencia de Odiseo al inicio de la obra?",
+    answer: ["multiforme ingenio", "multiforme"],
+    answerText: "Multiforme ingenio",
+    explanation: "La Odisea abre con 'aquel varón de multiforme ingenio'. Este epíteto resume el carácter de Odiseo: astuto, versátil y adaptable."
+  },
+  {
+    id: 23,
+    canto: "I",
+    topic: "Concilio de los Dioses",
+    difficulty: "difícil",
+    type: "mcq",
+    prompt: "Según Atenea en el concilio, ¿quién es el padre de la ninfa Calipso que sostiene las columnas entre la tierra y el cielo?",
+    choices: ["Zeus", "Poseidón", "Atlante", "Forcis"],
+    answer: 2,
+    explanation: "Atenea describe la isla diciendo que 'tiene su mansión una diosa, la hija del terrible Atlante, de aquel que conoce todas las profundidades del ponto y sostiene las grandes columnas que separan la tierra y el cielo'. Calipso es hija de Atlante."
+  },
+
+  // ════════════════════════════
+  //        CANTO II
+  // ════════════════════════════
+  {
+    id: 24,
+    canto: "II",
+    topic: "Asamblea en Ítaca",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Quién convocó la primera asamblea de los itacenses en el Canto II?",
+    answer: ["telémaco", "telemaco"],
+    answerText: "Telémaco",
+    explanation: "Telémaco, siguiendo el consejo de Atenea-Mentes del Canto I, convocó a los aqueos en el ágora para exigir que los pretendientes abandonaran su palacio."
+  },
+  {
+    id: 25,
+    canto: "II",
+    topic: "Asamblea en Ítaca",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué signo enviaron los dioses durante la asamblea del Canto II para respaldar a Telémaco?",
+    choices: ["Un rayo desde el cielo", "Dos águilas que se atacaron mutuamente", "Un terremoto", "Una bandada de palomas blancas"],
+    answer: 1,
+    explanation: "Zeus envió dos águilas que volaron desde una cumbre y se acometieron con las garras. El adivino Haliterses interpretó esto como señal del regreso cercano de Odiseo."
+  },
+  {
+    id: 26,
+    canto: "II",
+    topic: "Asamblea en Ítaca",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llamaba el adivino que interpretó el portento de las águilas en favor de Telémaco?",
+    answer: ["haliterses"],
+    answerText: "Haliterses",
+    explanation: "Haliterses Mastorida, anciano adivino itacense, interpretó el vuelo de las águilas como presagio del inminente regreso de Odiseo y como advertencia a los pretendientes."
+  },
+  {
+    id: 27,
+    canto: "II",
+    topic: "Asamblea en Ítaca",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué artimañas usaba Penélope para retrasar su nueva boda ante los pretendientes?",
+    choices: [
+      "Fingía enfermedades continuamente",
+      "Tejía un sudario de día y lo deshacía de noche",
+      "Decía que esperaba una señal de los dioses",
+      "Enviaba a pretendientes a peligrosas misiones"
+    ],
+    answer: 1,
+    explanation: "El pretendiente Antínoo revela en la asamblea que Penélope tejía el sudario funerario de Laertes durante el día y lo destejía por las noches, engañando a los pretendientes durante tres años."
+  },
+  {
+    id: 28,
+    canto: "II",
+    topic: "Partida de Telémaco",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Bajo qué disfraz acompañó Atenea a Telémaco como capitán de su nave en el Canto II?",
+    answer: ["mentor"],
+    answerText: "Mentor",
+    explanation: "Atenea tomó la forma de Mentor, un anciano amigo de Odiseo, para acompañar y guiar a Telémaco en su viaje a Pilos y Esparta."
+  },
+  {
+    id: 29,
+    canto: "II",
+    topic: "Partida de Telémaco",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "Telémaco informó abiertamente a su madre Penélope de su plan de viajar antes de partir.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. Telémaco partió en secreto de noche sin decírselo a Penélope para evitar que ella intentara detenerlo, siguiendo el consejo de Atenea."
+  },
+
+  // ════════════════════════════
+  //        CANTO III
+  // ════════════════════════════
+  {
+    id: 30,
+    canto: "III",
+    topic: "Telémaco en Pilos",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Qué rey gerenio recibió a Telémaco en la ciudad de Pilos?",
+    answer: ["néstor", "nestor"],
+    answerText: "Néstor",
+    explanation: "Néstor Nelida, el más anciano y sabio de los guerreros aqueos de Troya, acogió a Telémaco en Pilos donde celebraba un sacrificio a Poseidón."
+  },
+  {
+    id: 31,
+    canto: "III",
+    topic: "Telémaco en Pilos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué actividad religiosa estaba realizando Néstor cuando llegó Telémaco a Pilos?",
+    choices: [
+      "Celebrando bodas de su hijo",
+      "Ofreciendo sacrificios de toros negros a Poseidón",
+      "Consultando al oráculo de Apolo",
+      "Preparando una expedición de caza"
+    ],
+    answer: 1,
+    explanation: "Telémaco llegó en el momento en que Néstor y los pilios sacrificaban toros negros a Poseidón en la orilla del mar, con nueve grupos sentados alrededor."
+  },
+  {
+    id: 32,
+    canto: "III",
+    topic: "Telémaco en Pilos",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cuál fue la suerte de Agamenón al regresar de Troya, según cuenta Néstor?",
+    choices: [
+      "Murió en una tormenta en el mar",
+      "Fue asesinado por Egisto con ayuda de Clitemnestra",
+      "Regresó sano a Micenas y reinó muchos años",
+      "Fue capturado y vendido como esclavo"
+    ],
+    answer: 1,
+    explanation: "Agamenón fue asesinado por Egisto, quien había seducido a su esposa Clitemnestra durante los años de la guerra y tendió una trampa a su regreso."
+  },
+  {
+    id: 33,
+    canto: "III",
+    topic: "Telémaco en Pilos",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Con qué hijo de Néstor viajó Telémaco desde Pilos hasta Esparta?",
+    answer: ["pisístrato", "pisistratos", "pisisrato"],
+    answerText: "Pisístrato",
+    explanation: "Néstor envió a su hijo Pisístrato como compañero de viaje de Telémaco para la jornada terrestre desde Pilos hasta la ciudad de Esparta."
+  },
+
+  // ════════════════════════════
+  //        CANTO IV
+  // ════════════════════════════
+  {
+    id: 34,
+    canto: "IV",
+    topic: "Telémaco en Esparta",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué pareja real recibió a Telémaco en Esparta?",
+    choices: ["Agamenón y Clitemnestra", "Menelao y Helena", "Néstor y Euridice", "Idomeneo y su esposa"],
+    answer: 1,
+    explanation: "Menelao, rey de Esparta, y Helena, que había sido la causa de la guerra de Troya, recibieron calurosamente a Telémaco en su palacio de Esparta."
+  },
+  {
+    id: 35,
+    canto: "IV",
+    topic: "Telémaco en Esparta",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llamaba la droga que esparció Helena en el vino para aliviar el dolor y el llanto de los comensales?",
+    answer: ["nepente", "népenthe"],
+    answerText: "Nepente",
+    explanation: "Helena vertió en la copa de vino un brebaje llamado nepente, que hacía olvidar el dolor y el llanto. Lo había recibido de la reina Polidamna de Egipto."
+  },
+  {
+    id: 36,
+    canto: "IV",
+    topic: "Menelao y Proteo",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Dónde quedó retenido Menelao durante su regreso de Troya, según él mismo cuenta a Telémaco?",
+    choices: ["En Creta", "En la isla de Faros, frente a Egipto", "En la isla de Rodas", "En las costas de Libia"],
+    answer: 1,
+    explanation: "Menelao y sus naves quedaron varados en la isla de Faros, frente a las costas de Egipto, sin poder partir por falta de vientos favorables."
+  },
+  {
+    id: 37,
+    canto: "IV",
+    topic: "Menelao y Proteo",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llamaba el anciano del mar que capturó Menelao para obtener información sobre su regreso?",
+    answer: ["proteo"],
+    answerText: "Proteo",
+    explanation: "Proteo era el anciano del mar, pastor de las focas de Poseidón, con poder de transformarse en cualquier cosa. Menelao lo capturó con ayuda de su hija Eidotea."
+  },
+  {
+    id: 38,
+    canto: "IV",
+    topic: "Menelao y Proteo",
+    difficulty: "difícil",
+    type: "mcq",
+    prompt: "Según lo que reveló Proteo a Menelao, ¿dónde estaba retenido Odiseo en ese momento?",
+    choices: [
+      "Con la bruja Circe en la isla Eea",
+      "En la isla de Calipso, llorando sin poder marcharse",
+      "En el fondo del mar junto a Poseidón",
+      "En la cueva de los Cíclopes"
+    ],
+    answer: 1,
+    explanation: "Proteo reveló a Menelao que Odiseo estaba en la isla de la ninfa Calipso (Ogigia), retenido contra su voluntad, llorando sin naves ni compañeros que lo llevasen a casa."
+  },
+  {
+    id: 39,
+    canto: "IV",
+    topic: "Conspiración en Ítaca",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué plan tramaron los pretendientes ante la ausencia de Telémaco?",
+    choices: [
+      "Casarse sin dilación con Penélope",
+      "Tenderle una emboscada con un barco para matarlo a su regreso",
+      "Enviar mensajeros al rey de Pilos",
+      "Expulsar de Ítaca a Euriclea"
+    ],
+    answer: 1,
+    explanation: "Los pretendientes acordaron apostarse con una nave armada en el paso entre Ítaca y Cefalonia para matar a Telémaco a su regreso antes de que pudiera buscar aliados."
+  },
+
+  // ════════════════════════════
+  //        CANTO V
+  // ════════════════════════════
+  {
+    id: 40,
+    canto: "V",
+    topic: "Liberación de Odiseo",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Qué dios fue enviado al Olimpo a comunicar a Calipso la orden de dejar marchar a Odiseo?",
+    answer: ["hermes"],
+    answerText: "Hermes",
+    explanation: "Hermes, mensajero de los dioses, recibió de Zeus la orden de volar a la isla Ogigia y comunicar a Calipso que debía dejar que Odiseo construyera una balsa y partiera."
+  },
+  {
+    id: 41,
+    canto: "V",
+    topic: "Liberación de Odiseo",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cuántos años llevaba Odiseo retenido con Calipso al comienzo de su liberación?",
+    choices: ["Tres años", "Cinco años", "Siete años", "Diez años"],
+    answer: 2,
+    explanation: "Odiseo llevaba siete años en la isla Ogigia con la ninfa Calipso cuando los dioses decidieron permitirle regresar a Ítaca."
+  },
+  {
+    id: 42,
+    canto: "V",
+    topic: "La Balsa y la Tormenta",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué construyó Odiseo para abandonar la isla de Calipso?",
+    choices: ["Una barca de remos", "Una balsa de madera", "Una canoa de juncos", "Un velero con quilla"],
+    answer: 1,
+    explanation: "Calipso le proporcionó herramientas y Odiseo taló veinte árboles para construir una balsa amplia y robusta con la que surcó el mar durante diecisiete días."
+  },
+  {
+    id: 43,
+    canto: "V",
+    topic: "La Balsa y la Tormenta",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué diosa del mar (transformada en alcatraz) le prestó su velo mágico a Odiseo para salvarse del naufragio?",
+    choices: ["Tetis", "Leucotea (Ino)", "Anfitrite", "Nereida"],
+    answer: 1,
+    explanation: "Leucotea, antes mortal llamada Ino, se compadeció de Odiseo y le entregó su velo divino que, atado bajo el pecho, le permitió nadar hasta tierra firme sin perecer."
+  },
+  {
+    id: 44,
+    canto: "V",
+    topic: "La Balsa y la Tormenta",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿En qué tierra (de qué pueblo) llegó Odiseo exhausto tras el naufragio causado por Poseidón?",
+    answer: ["feacios", "esqueria", "feacia"],
+    answerText: "Tierra de los Feacios (Esqueria)",
+    explanation: "Tras la tormenta que destruyó su balsa, Odiseo nadó durante dos días hasta llegar a las costas de Esqueria, tierra de los feacios, donde fue recibido según las leyes de hospitalidad."
+  },
+
+  // ════════════════════════════
+  //        CANTO VI
+  // ════════════════════════════
+  {
+    id: 45,
+    canto: "VI",
+    topic: "Odiseo y Nausícaa",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba la joven princesa feacia que encontró a Odiseo en la orilla del río?",
+    answer: ["nausícaa", "nausicaa"],
+    answerText: "Nausícaa",
+    explanation: "Nausícaa, hija del rey Alcínoo y la reina Arete, fue enviada al río por Atenea (en sueños) a lavar ropa y fue ella quien halló a Odiseo dormido entre los matorrales."
+  },
+  {
+    id: 46,
+    canto: "VI",
+    topic: "Odiseo y Nausícaa",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué actividad realizaba Nausícaa con sus criadas cuando encontró a Odiseo?",
+    choices: ["Recogían flores en el campo", "Lavaban ropa en el río y jugaban a la pelota", "Pescaban en la orilla", "Tejían y cantaban"],
+    answer: 1,
+    explanation: "Nausícaa y sus sirvientas habían ido al río a lavar la ropa del palacio; tras hacerlo, mientras esperaban que secara, jugaban a la pelota cuando el grito alertó a Odiseo."
+  },
+  {
+    id: 47,
+    canto: "VI",
+    topic: "Odiseo y Nausícaa",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "Odiseo se arrojó a los pies de Nausícaa para suplicarle ayuda cuando la encontró.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. Odiseo se quedó a distancia prudente (sosteniendo una rama de olivo para cubrirse) y le dirigió palabras de súplica sin tocarla, pues las criadas habían huido asustadas."
+  },
+  {
+    id: 48,
+    canto: "VI",
+    topic: "Odiseo y Nausícaa",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cómo aconsejó Nausícaa a Odiseo que entrara a la ciudad para no levantar habladurías?",
+    choices: [
+      "Que llegara de noche por el camino del bosque",
+      "Que esperara fuera de la ciudad mientras ella avisaba al rey",
+      "Que se quedara junto al río y el rey lo enviaría a buscar",
+      "Que entrara directamente por la puerta principal"
+    ],
+    answer: 0,
+    explanation: "Nausícaa sugirió a Odiseo que esperara en el bosque sagrado de Atenea a las afueras y que luego entrara solo a palacio para no dar lugar a murmuraciones sobre ella."
+  },
+
+  // ════════════════════════════
+  //        CANTO VII
+  // ════════════════════════════
+  {
+    id: 49,
+    canto: "VII",
+    topic: "El Palacio de los Feacios",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba el rey de los feacios que acogió a Odiseo en su palacio?",
+    answer: ["alcínoo", "alcinoo"],
+    answerText: "Alcínoo",
+    explanation: "Alcínoo era el rey de los feacios, hijo de Nausítoo, conocido por su hospitalidad y por poseer las naves más veloces del mundo."
+  },
+  {
+    id: 50,
+    canto: "VII",
+    topic: "El Palacio de los Feacios",
+    difficulty: "basico",
+    type: "input",
+    prompt: "¿Cómo se llamaba la reina de los feacios, esposa de Alcínoo?",
+    answer: ["arete", "areté"],
+    answerText: "Arete",
+    explanation: "Arete era la reina de los feacios, respetada como una diosa por su pueblo. Nausícaa aconsejó a Odiseo que se dirigiera primero a ella para ganarse su favor."
+  },
+  {
+    id: 51,
+    canto: "VII",
+    topic: "El Palacio de los Feacios",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué prometió Alcínoo a Odiseo si le contaba su historia y quién era?",
+    choices: [
+      "Darle un barco nuevo y la mano de Nausícaa",
+      "Llevarlo a casa con un barco feacio y darle ricos regalos",
+      "Concederle la ciudadanía de Esqueria",
+      "Enviar un ejército a libertar Ítaca"
+    ],
+    answer: 1,
+    explanation: "Alcínoo prometió que los feacios, famosos por sus naves veloces, conducirían a Odiseo a su patria, aunque estuviera más lejos que cualquier tierra conocida."
+  },
+
+  // ════════════════════════════
+  //        CANTO VIII
+  // ════════════════════════════
+  {
+    id: 52,
+    canto: "VIII",
+    topic: "Los Juegos Feacios",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba el aedo ciego de los feacios que cantaba en el banquete de Alcínoo?",
+    answer: ["demódoco", "demodoco"],
+    answerText: "Demódoco",
+    explanation: "Demódoco era el aedo inspirado por los dioses que, a pesar de ser ciego, cantaba con gran maestría. Las Musas le arrebataron la vista pero le dieron el don de la música."
+  },
+  {
+    id: 53,
+    canto: "VIII",
+    topic: "Los Juegos Feacios",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cuál fue la primera tema que cantó Demódoco que hizo llorar a Odiseo en secreto?",
+    choices: [
+      "El amor de Ares y Afrodita",
+      "La disputa entre Odiseo y Aquiles sobre cómo caería Troya",
+      "El regreso de Menelao a Esparta",
+      "La muerte de Patroclo"
+    ],
+    answer: 1,
+    explanation: "Demódoco cantó la querella entre Aquiles y Odiseo sobre si Troya caería por la fuerza o el ingenio. Odiseo lloraba tapándose el rostro con el manto."
+  },
+  {
+    id: 54,
+    canto: "VIII",
+    topic: "Los Juegos Feacios",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿De qué trataba la segunda canción de Demódoco que los feacios tanto disfrutaron?",
+    choices: [
+      "El caballo de madera de Troya",
+      "Los amores adúlteros de Ares y Afrodita atrapados por Hefesto",
+      "El viaje de los Argonautas",
+      "La caída del muro de Troya"
+    ],
+    answer: 1,
+    explanation: "Demódoco cantó cómo Hefesto tendió una red invisible sobre la cama y atrapó a Ares y Afrodita en pleno adulterio, haciéndolos objeto de risa de los dioses."
+  },
+  {
+    id: 55,
+    canto: "VIII",
+    topic: "Los Juegos Feacios",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Quién de los feacios desafió e insultó a Odiseo en los juegos atléticos?",
+    choices: ["Laodamante", "Euríalo", "Halios", "Clitóneo"],
+    answer: 1,
+    explanation: "Euríalo insultó a Odiseo llamándole mercader y no atleta, provocando que Odiseo lanzara el disco más lejos que todos los feacios."
+  },
+
+  // ════════════════════════════
+  //        CANTO IX
+  // ════════════════════════════
+  {
+    id: 56,
+    canto: "IX",
+    topic: "Los Cicones y los Lotófagos",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cuál fue el primer pueblo que saqueó Odiseo tras partir de Troya?",
+    answer: ["cicones", "cícones"],
+    answerText: "Los Cicones (en Ísmaro)",
+    explanation: "Al dejar Troya, Odiseo y sus hombres saquearon la ciudad de Ísmaro de los cicones. Los supervivientes llamaron a refuerzos y al día siguiente masacraron a muchos griegos."
+  },
+  {
+    id: 57,
+    canto: "IX",
+    topic: "Los Cicones y los Lotófagos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué efecto producía el fruto del loto en los compañeros de Odiseo?",
+    choices: [
+      "Los volvía violentos y agresivos",
+      "Los dormía durante días",
+      "Les hacía olvidar el regreso y querer quedarse",
+      "Los convertía en animales"
+    ],
+    answer: 2,
+    explanation: "Los que comieron el dulce fruto del loto olvidaban la patria y ya no querían regresar. Odiseo tuvo que arrastrarlos por la fuerza de vuelta a las naves."
+  },
+  {
+    id: 58,
+    canto: "IX",
+    topic: "Polifemo el Cíclope",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba el cíclope que capturó a Odiseo y sus compañeros en su cueva?",
+    answer: ["polifemo"],
+    answerText: "Polifemo",
+    explanation: "Polifemo era hijo de Poseidón y la ninfa Toosa. Vivía en una isla y se alimentaba de sus ovejas. Capturó a doce compañeros de Odiseo, devorando a dos cada mañana y noche."
+  },
+  {
+    id: 59,
+    canto: "IX",
+    topic: "Polifemo el Cíclope",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué nombre se dio Odiseo cuando el Cíclope preguntó cómo se llamaba?",
+    choices: ["Nadie / Ninguno", "Odiseo de Ítaca", "Mentes de Tafos", "El viajero sin nombre"],
+    answer: 0,
+    explanation: "Odiseo dijo llamarse 'Nadie' (Udeis/Outis en griego). Así, cuando Polifemo gritó que 'Nadie' le mataba, los otros cíclopes no fueron a ayudarlo."
+  },
+  {
+    id: 60,
+    canto: "IX",
+    topic: "Polifemo el Cíclope",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Con qué instrumento cegó Odiseo a Polifemo?",
+    choices: [
+      "Con una espada de bronce",
+      "Con una estaca de olivo endurecida al fuego",
+      "Con una lanza de hierro",
+      "Con brasas del hogar"
+    ],
+    answer: 1,
+    explanation: "Odiseo cortó y afiló una estaca del gran palo de olivo que encontró en la cueva, la endureció al fuego y, cuando el cíclope dormía borracho, se la clavaron en el ojo."
+  },
+  {
+    id: 61,
+    canto: "IX",
+    topic: "Polifemo el Cíclope",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cómo escaparon Odiseo y sus hombres de la cueva de Polifemo?",
+    choices: [
+      "Escalaron el techo de la cueva",
+      "Esperaron a que el cíclope abriera la puerta y corrieron",
+      "Ataron a los hombres bajo el vientre de los carneros",
+      "Excavaron un túnel por la base de la roca"
+    ],
+    answer: 2,
+    explanation: "Odiseo ató a cada hombre bajo el vientre de tres carneros. Él mismo se aferró bajo el mayor. Cuando Polifemo abrió la cueva y palpó los lomos de las ovejas, no los detectó."
+  },
+  {
+    id: 62,
+    canto: "IX",
+    topic: "Polifemo el Cíclope",
+    difficulty: "difícil",
+    type: "truefalse",
+    prompt: "El error fatal de Odiseo al alejarse de la isla de Polifemo fue revelar su verdadero nombre.",
+    choices: ["Verdadero", "Falso"],
+    answer: 0,
+    explanation: "Verdadero. A pesar de las súplicas de sus hombres, Odiseo gritó su nombre real al cíclope. Polifemo invocó a su padre Poseidón para que impidiese el regreso de Odiseo."
+  },
+
+  // ════════════════════════════
+  //        CANTO X
+  // ════════════════════════════
+  {
+    id: 63,
+    canto: "X",
+    topic: "Eolo y los Vientos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué regalo hizo Eolo a Odiseo al despedirlo de su isla flotante?",
+    choices: [
+      "Un mapa de los mares desconocidos",
+      "Un odre de piel que contenía encerrados todos los vientos contrarios",
+      "Cien toros y cien ovejas",
+      "Una armadura divina"
+    ],
+    answer: 1,
+    explanation: "Eolo entregó a Odiseo un odre de piel de buey de nueve años donde había encerrado todos los vientos tormentosos, dejando solo soplar el favorable céfiro para llevarlos a Ítaca."
+  },
+  {
+    id: 64,
+    canto: "X",
+    topic: "Eolo y los Vientos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué hicieron los compañeros de Odiseo con el odre de Eolo cuando ya divisaban Ítaca?",
+    choices: [
+      "Lo tiraron al mar por miedo",
+      "Lo abrieron creyendo que contenía oro y riquezas",
+      "Lo rompieron accidentalmente",
+      "Se lo entregaron a Odiseo que dormía"
+    ],
+    answer: 1,
+    explanation: "Codiciosos, los compañeros abrieron el odre pensando que era oro. Los vientos escaparon y arrastraron las naves nuevamente hasta la isla de Eolo, que esta vez se negó a ayudarlos."
+  },
+  {
+    id: 65,
+    canto: "X",
+    topic: "Los Lestrigones",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué le ocurrió a la flota de Odiseo en el puerto de los Lestrigones?",
+    choices: [
+      "Sus naves fueron quemadas por rayos",
+      "Los gigantes Lestrigones destruyeron todas las naves menos una y comieron a las tripulaciones",
+      "Una tormenta hundió la mitad de las naves",
+      "Los marineros desertaron y se quedaron allí"
+    ],
+    answer: 1,
+    explanation: "Los Lestrigones eran gigantes caníbales. Arrojaron rocas desde los acantilados destruyendo todas las naves que estaban en el puerto cerrado; solo la nave de Odiseo —que ancló fuera— escapó."
+  },
+  {
+    id: 66,
+    canto: "X",
+    topic: "Circe",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba la maga que convirtió a los compañeros de Odiseo en cerdos?",
+    answer: ["circe"],
+    answerText: "Circe",
+    explanation: "Circe era hija del Sol (Helios) y vivía en la isla Eea. Con su varita y pociones convirtió a los compañeros de Odiseo en cerdos. Hermes le enseñó a Odiseo cómo resistir su magia."
+  },
+  {
+    id: 67,
+    canto: "X",
+    topic: "Circe",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llamaba la hierba mágica que Hermes dio a Odiseo para protegerlo de los encantamientos de Circe?",
+    answer: ["moli", "moly"],
+    answerText: "Moli (Moly)",
+    explanation: "Hermes le entregó a Odiseo la hierba llamada moli, de raíz negra y flor blanca como la leche, que servía de antídoto contra los filtros de Circe."
+  },
+  {
+    id: 68,
+    canto: "X",
+    topic: "Circe",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cuánto tiempo permaneció Odiseo en la isla de Circe?",
+    choices: ["Tres meses", "Seis meses", "Un año", "Dos años"],
+    answer: 2,
+    explanation: "Odiseo y sus compañeros se quedaron un año completo en la isla de Circe disfrutando de sus atenciones, hasta que los compañeros le recordaron a Odiseo el regreso a Ítaca."
+  },
+
+  // ════════════════════════════
+  //        CANTO XI
+  // ════════════════════════════
+  {
+    id: 69,
+    canto: "XI",
+    topic: "El Hades",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿A qué adivino fue a consultar Odiseo al reino de los muertos (Hades)?",
+    answer: ["tiresias"],
+    answerText: "Tiresias",
+    explanation: "Tiresias era el gran adivino tebano que conservaba su razón y poder de profecía incluso en el Hades. Circe le dijo a Odiseo que solo él podría indicarle el camino a casa."
+  },
+  {
+    id: 70,
+    canto: "XI",
+    topic: "El Hades",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué profetizó Tiresias sobre el regreso de Odiseo a Ítaca?",
+    choices: [
+      "Que llegaría con todos sus hombres en gloria y riqueza",
+      "Que regresaría solo y con mucho sufrimiento, en nave ajena, para encontrar trifulca en su hogar",
+      "Que nunca volvería a Ítaca",
+      "Que llegaría a Ítaca antes del fin del verano"
+    ],
+    answer: 1,
+    explanation: "Tiresias profetizó que Odiseo llegaría tarde y mal, solo, en nave ajena, y encontraría pretendientes en su casa. También le advirtió de no tocar las vacas de Helios."
+  },
+  {
+    id: 71,
+    canto: "XI",
+    topic: "El Hades",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿La sombra de qué familiar vio Odiseo en el Hades que le causó profundo dolor?",
+    answer: ["anticlea", "su madre", "anticlea su madre"],
+    answerText: "Anticlea, su madre",
+    explanation: "Odiseo vio la sombra de su madre Anticlea, que había muerto de pena durante su larga ausencia. Intentó abrazarla tres veces pero la sombra se escapó de sus manos como un sueño."
+  },
+  {
+    id: 72,
+    canto: "XI",
+    topic: "El Hades",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué famosa afirmación hizo Aquiles sobre la muerte en su diálogo con Odiseo en el Hades?",
+    choices: [
+      "Que era feliz siendo el rey de los muertos",
+      "Que prefería ser el más humilde labrador en la tierra antes que reinar sobre todos los muertos",
+      "Que la inmortalidad no valía el sufrimiento",
+      "Que esperaba la reencarnación como guerrero"
+    ],
+    answer: 1,
+    explanation: "Aquiles dijo a Odiseo que prefería ser el más pobre siervo en la tierra a ser el rey de los muertos. Esta frase subraya el valor que los griegos daban a la vida terrena."
+  },
+
+  // ════════════════════════════
+  //        CANTO XII
+  // ════════════════════════════
+  {
+    id: 73,
+    canto: "XII",
+    topic: "Las Sirenas",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cómo evitó Odiseo perecer por el canto de las Sirenas?",
+    choices: [
+      "Tapó sus propios oídos con cera y siguió su camino",
+      "Se ató al mástil y tapó los oídos de sus hombres con cera",
+      "Mandó a sus hombres remar más rápido",
+      "Circe le enseñó un canto contra-mágico"
+    ],
+    answer: 1,
+    explanation: "Circe le instruyó: Odiseo tapó los oídos de los remeros con cera y ordenó que lo ataran al mástil para poder escuchar el canto sin poder actuar en consecuencia."
+  },
+  {
+    id: 74,
+    canto: "XII",
+    topic: "Escila y Caribdis",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué hacía el monstruo Caribdis?",
+    choices: [
+      "Devoraba marineros con sus seis cabezas",
+      "Absorbía y escupía el agua del mar, creando un torbellino",
+      "Transformaba a los hombres en animales",
+      "Cantaba para atraer a los barcos a los arrecifes"
+    ],
+    answer: 1,
+    explanation: "Caribdis tragaba el agua del mar tres veces al día formando un temible remolino y luego la escupía. Odiseo tuvo que pasar más cerca de Escila para evitarla."
+  },
+  {
+    id: 75,
+    canto: "XII",
+    topic: "Escila y Caribdis",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cuántos compañeros de Odiseo devoró Escila al pasar por el estrecho?",
+    choices: ["Dos", "Cuatro", "Seis", "Doce"],
+    answer: 2,
+    explanation: "Escila tenía seis cabezas y cada una atrapó a un hombre. Odiseo vio a sus compañeros ser izados en el aire mientras le gritaban desesperadamente su nombre."
+  },
+  {
+    id: 76,
+    canto: "XII",
+    topic: "Las Vacas de Helios",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Quién organizó el sacrificio de las vacas sagradas de Helios, contraviniendo la orden de Odiseo?",
+    choices: ["Antínoo", "Euríloco", "Elpenor", "Perimedes"],
+    answer: 1,
+    explanation: "Euríloco convenció a los hambrientos compañeros de sacrificar las mejores vacas de Helios durante el mes que estuvieron varados por los vientos contrarios en la isla de Trinacia."
+  },
+  {
+    id: 77,
+    canto: "XII",
+    topic: "Las Vacas de Helios",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cómo castigó Zeus a los compañeros de Odiseo por comer las vacas de Helios?",
+    choices: [
+      "Los convirtió en piedra",
+      "Lanzó un rayo que hundió su nave en alta mar",
+      "Envió una plaga que los mató uno a uno",
+      "Los transformó en delfines"
+    ],
+    answer: 1,
+    explanation: "Helios amenazó con descender al Hades si no se hacía justicia. Zeus lanzó un rayo sobre la nave cuando ya estaban en alta mar; todos los compañeros perecieron ahogados."
+  },
+
+  // ════════════════════════════
+  //        CANTO XIII
+  // ════════════════════════════
+  {
+    id: 78,
+    canto: "XIII",
+    topic: "Regreso a Ítaca",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿En qué estado llegó Odiseo a Ítaca en el barco feacio?",
+    choices: [
+      "Despierto, conduciendo él mismo el timón",
+      "Dormido profundamente, depositado en la orilla por los marineros",
+      "Gravemente herido y febril",
+      "Encadenado por temor a que se escapase"
+    ],
+    answer: 1,
+    explanation: "Los feacios depositaron a Odiseo dormido en la playa de Ítaca junto a sus regalos, bajo un olivo, antes de partir velozmente de regreso a Esqueria."
+  },
+  {
+    id: 79,
+    canto: "XIII",
+    topic: "Regreso a Ítaca",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cómo castigó Poseidón a los feacios por haber transportado a Odiseo?",
+    choices: [
+      "Envió una tormenta que destruyó su flota",
+      "Convirtió su barco de regreso en una roca de piedra",
+      "Les arrebató el don de la navegación",
+      "Los condenó a tormentosas travesías por siempre"
+    ],
+    answer: 1,
+    explanation: "Poseidón, furioso por que los feacios habían regresado a Odiseo, convirtió el barco en piedra frente al puerto de Esqueria, cumpliéndose así una antigua profecía."
+  },
+  {
+    id: 80,
+    canto: "XIII",
+    topic: "Regreso a Ítaca",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué transformación impuso Atenea a Odiseo para moverse en secreto por Ítaca?",
+    choices: [
+      "Lo convirtió en un joven desconocido",
+      "Le dio el aspecto de un anciano mendigo arrugado y mal vestido",
+      "Lo hizo invisible por tres días",
+      "Lo transformó en un pastor con otro nombre"
+    ],
+    answer: 1,
+    explanation: "Atenea arrugó su piel, oscureció sus ojos brillantes, le puso ropas andrajosas y lo disfrazó de viejo mendigo para que nadie en Ítaca pudiera reconocerlo."
+  },
+
+  // ════════════════════════════
+  //        CANTO XIV
+  // ════════════════════════════
+  {
+    id: 81,
+    canto: "XIV",
+    topic: "Odiseo y Eumeo",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cuál era el oficio de Eumeo, el primer itacense que acogió a Odiseo disfrazado?",
+    answer: ["porquero", "guardián de cerdos"],
+    answerText: "Porquero (guardián de cerdos)",
+    explanation: "Eumeo era el fiel porquero de Odiseo. A pesar de ser esclavo, siempre fue leal a su amo ausente y recibió al mendigo con hospitalidad genuina."
+  },
+  {
+    id: 82,
+    canto: "XIV",
+    topic: "Odiseo y Eumeo",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "Eumeo reconoció inmediatamente a Odiseo bajo su disfraz de mendigo.",
+    choices: ["Verdadero", "Falso"],
+    answer: 1,
+    explanation: "Falso. Eumeo no reconoció a Odiseo y lo trató como un extranjero mendigo, mostrando su nobleza de carácter al dispensarle hospitalidad sin saber quién era."
+  },
+  {
+    id: 83,
+    canto: "XIV",
+    topic: "Odiseo y Eumeo",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué origen invento Odiseo (disfrazado de mendigo) para presentarse ante Eumeo?",
+    choices: [
+      "Dijo ser un marinero fenicio naufragado",
+      "Se presentó como un soldado cretense de noble cuna que había caído en desgracia",
+      "Fingió ser un comerciante robo por piratas",
+      "Se dijo hijo de un esclavo libertado en Troya"
+    ],
+    answer: 1,
+    explanation: "Odiseo inventó la historia de ser un cretense de linaje noble que había luchado en Troya, luego intentado una empresa en Egipto y terminado esclavizado. Era una de sus habituales historias fabricadas."
+  },
+
+  // ════════════════════════════
+  //        CANTO XV
+  // ════════════════════════════
+  {
+    id: 84,
+    canto: "XV",
+    topic: "Regreso de Telémaco",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Quién alertó a Telémaco en Esparta para que regresara urgentemente a Ítaca?",
+    choices: ["Menelao", "Helena", "Atenea (en sueños)", "Pisístrato"],
+    answer: 2,
+    explanation: "Atenea se apareció a Telémaco en sueños mientras dormía en el palacio de Menelao y le advirtió que regresara pronto: su madre podría casarse y los pretendientes le tendían una emboscada."
+  },
+  {
+    id: 85,
+    canto: "XV",
+    topic: "Regreso de Telémaco",
+    difficulty: "medio",
+    type: "input",
+    prompt: "¿Cómo se llamaba el adivino que viajó en el barco de Telémaco desde Pilos huyendo de Argos?",
+    answer: ["teoclímeno", "teoclimeno"],
+    answerText: "Teoclímeno",
+    explanation: "Teoclímeno era un adivino de linaje noble que huía de Argos por haber matado a un pariente. Telémaco le concedió pasaje en su nave y lo acogió en Ítaca."
+  },
+  {
+    id: 86,
+    canto: "XV",
+    topic: "Regreso de Telémaco",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cuál fue el presagio que vio Telémaco al partir de Esparta, que Helena interpretó favorablemente?",
+    choices: [
+      "Una estrella fugaz de izquierda a derecha",
+      "Un águila volando hacia la derecha con un ganso blanco en las garras",
+      "Una lechuza sobrevolando las naves",
+      "Un arco iris sobre el palacio de Menelao"
+    ],
+    answer: 1,
+    explanation: "Un águila voló desde la derecha llevando un ganso doméstico en sus garras. Helena lo interpretó como augurio de que Odiseo regresaría a Ítaca y vengaría las ofensas en su casa."
+  },
+
+  // ════════════════════════════
+  //        CANTO XVI
+  // ════════════════════════════
+  {
+    id: 87,
+    canto: "XVI",
+    topic: "Reconocimiento: Padre e Hijo",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Dónde se produjo el primer encuentro entre Telémaco y el mendigo-Odiseo?",
+    choices: [
+      "En el palacio de Ítaca",
+      "En la choza del porquero Eumeo",
+      "En la playa de Ítaca",
+      "En el bosque de Atenea"
+    ],
+    answer: 1,
+    explanation: "Telémaco se dirigió primero a la cabaña de Eumeo al regresar a Ítaca, siguiendo las instrucciones de Atenea. Allí encontró al mendigo (Odiseo disfrazado) y hablaron."
+  },
+  {
+    id: 88,
+    canto: "XVI",
+    topic: "Reconocimiento: Padre e Hijo",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Ante quién se reveló Odiseo como rey de Ítaca por primera vez tras su regreso?",
+    choices: ["Ante Eumeo", "Ante Penélope", "Ante su hijo Telémaco", "Ante el heraldo Medonte"],
+    answer: 2,
+    explanation: "Atenea devolvió brevemente a Odiseo su aspecto real para que se revelara a Telémaco. El joven al principio no lo creyó y lo tomó por un dios, pero abrazó a su padre con lágrimas."
+  },
+  {
+    id: 89,
+    canto: "XVI",
+    topic: "Reconocimiento: Padre e Hijo",
+    difficulty: "difícil",
+    type: "mcq",
+    prompt: "¿Cuántos pretendientes había en total según el recuento del Canto XVI?",
+    choices: ["Cincuenta y dos", "Ochenta", "Ciento ocho", "Ciento veinte"],
+    answer: 2,
+    explanation: "Telémaco enumera: ciento doce pretendientes de Ítaca y el entorno, más veinticuatro de Duliquio, doce de Samos y veinte de Zacinto, para un total aproximado de 108 pretendientes."
+  },
+
+  // ════════════════════════════
+  //        CANTO XVII
+  // ════════════════════════════
+  {
+    id: 90,
+    canto: "XVII",
+    topic: "El Perro Argos",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba el perro de Odiseo que lo reconoció a su regreso disfrazado de mendigo?",
+    answer: ["argos"],
+    answerText: "Argos",
+    explanation: "Argos había sido criado por el propio Odiseo antes de partir a Troya. Al reconocer a su amo después de veinte años meneó la cola y bajó las orejas, pero no pudo acercarse. Luego murió."
+  },
+  {
+    id: 91,
+    canto: "XVII",
+    topic: "El Perro Argos",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué ocurrió con el perro Argos justo después de reconocer a Odiseo?",
+    choices: [
+      "Corrió hacia él ladrando de alegría",
+      "Siguió a Odiseo al interior del palacio",
+      "Cayó muerto, cumplida su espera de veinte años",
+      "Fue espantado por los pretendientes"
+    ],
+    answer: 2,
+    explanation: "Argos, anciano y abandonado en el estercolero, apenas reconoció a su amo con un movimiento de orejas y cola. Odiseo se limpió una lágrima y el perro murió en ese instante."
+  },
+  {
+    id: 92,
+    canto: "XVII",
+    topic: "Los Pretendientes",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué pretendiente golpeó a Odiseo con un taburete cuando pidió comida en el banquete?",
+    choices: ["Eurímaco", "Antínoo", "Anfínomo", "Euríalo"],
+    answer: 1,
+    explanation: "Antínoo, el más arrogante de los pretendientes, lanzó un taburete a Odiseo cuando este mendigaba comida en el salón. Los demás pretendientes lo criticaron por este acto impío."
+  },
+
+  // ════════════════════════════
+  //        CANTO XVIII
+  // ════════════════════════════
+  {
+    id: 93,
+    canto: "XVIII",
+    topic: "El Combate con Iro",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Cómo se llamaba el mendigo que desafió a Odiseo (disfrazado) a pelear en el palacio?",
+    answer: ["iro", "arneo"],
+    answerText: "Iro (verdadero nombre: Arneo)",
+    explanation: "Iro era el mendigo habitual del palacio de Odiseo. Los pretendientes lo llamaban Iro (del mensajero Iris) porque hacía encargos. Desafió a Odiseo y perdió estrepitosamente."
+  },
+  {
+    id: 94,
+    canto: "XVIII",
+    topic: "El Combate con Iro",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué apostaron los pretendientes como premio en la pelea entre Iro y Odiseo?",
+    choices: [
+      "Una copa de vino y un trozo de pan",
+      "Morcillas de cabra rellenas de grasa y sangre",
+      "El mejor buey del rebaño",
+      "Una bolsa de monedas de oro"
+    ],
+    answer: 1,
+    explanation: "Los pretendientes prometieron al vencedor que escogería las morcillas de cabra que se asaban al fuego y que en adelante comería solo en los banquetes."
+  },
+  {
+    id: 95,
+    canto: "XVIII",
+    topic: "Los Pretendientes",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "En el Canto XVIII, Penélope salió ante los pretendientes para aceptar sus regalos, lo que alegró a Odiseo.",
+    choices: ["Verdadero", "Falso"],
+    answer: 0,
+    explanation: "Verdadero. Atenea inspiró a Penélope para salir y recibir regalos de los pretendientes, engrosando así el tesoro de la casa. Odiseo se alegró de ver la astucia de su esposa."
+  },
+
+  // ════════════════════════════
+  //        CANTO XIX
+  // ════════════════════════════
+  {
+    id: 96,
+    canto: "XIX",
+    topic: "Odiseo y Penélope",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cómo recibió Penélope al mendigo desconocido (Odiseo) en el Canto XIX?",
+    choices: [
+      "Lo echó del palacio por ser un mendigo",
+      "Lo interrogó con amabilidad y le ofreció refugio",
+      "Sospechó de inmediato que era Odiseo",
+      "Lo envió a dormir con los esclavos sin hablar con él"
+    ],
+    answer: 1,
+    explanation: "Penélope hizo llamar al mendigo, lo trató con consideración y le preguntó sobre sus viajes y sobre Odiseo. El mendigo la conmovió con historias sobre su esposo."
+  },
+  {
+    id: 97,
+    canto: "XIX",
+    topic: "Euriclea Reconoce la Cicatriz",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cómo reconoció Euriclea la identidad de Odiseo mientras le lavaba los pies?",
+    choices: [
+      "Por el color de sus ojos",
+      "Por una cicatriz en el muslo que dejó un jabalí en el monte Parnaso",
+      "Por una marca de nacimiento en el hombro",
+      "Por la forma de sus manos"
+    ],
+    answer: 1,
+    explanation: "Euriclea, su nodriza de infancia, palpó la cicatriz en el muslo que Odiseo se hizo de joven cazando con sus abuelos en el monte Parnaso. La cicatriz era inconfundible."
+  },
+  {
+    id: 98,
+    canto: "XIX",
+    topic: "El Concurso del Arco",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué concurso anunció Penélope para decidir a su futuro esposo?",
+    choices: [
+      "Una carrera de carros",
+      "Un concurso de canto y poesía",
+      "Tensar el arco de Odiseo y pasar una flecha por doce hachas alineadas",
+      "Un duelo de lanzas entre los pretendientes"
+    ],
+    answer: 2,
+    explanation: "Penélope anunció que se casaría con quien pudiese tensar el arco de Odiseo y disparar una flecha que pasase a través de los anillos de doce hachas alineadas."
+  },
+
+  // ════════════════════════════
+  //        CANTO XX
+  // ════════════════════════════
+  {
+    id: 99,
+    canto: "XX",
+    topic: "Vísperas de la Batalla",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Qué presagio envió Zeus la mañana del concurso del arco que escuchó Odiseo?",
+    choices: [
+      "Una lluvia de estrellas al amanecer",
+      "Un trueno desde un cielo despejado sin nubes",
+      "Un eclipse de sol",
+      "Una voz divina que prometía victoria"
+    ],
+    answer: 1,
+    explanation: "Odiseo rezó a Zeus y el dios la respondió con un trueno desde el cielo sereno. Una sirviente que molía trigo también lo interpretó como señal del fin de los pretendientes."
+  },
+  {
+    id: 100,
+    canto: "XX",
+    topic: "Vísperas de la Batalla",
+    difficulty: "medio",
+    type: "truefalse",
+    prompt: "El adivino Teoclímeno profetizó ante los pretendientes el día antes del concurso que su muerte era inminente.",
+    choices: ["Verdadero", "Falso"],
+    answer: 0,
+    explanation: "Verdadero. Teoclímeno vio una visión de los pretendientes envueltos en tinieblas y sus mejillas bañadas en lágrimas. Les profetizó la muerte pero los pretendientes se burlaron de él."
+  },
+
+  // ════════════════════════════
+  //        CANTO XXI
+  // ════════════════════════════
+  {
+    id: 101,
+    canto: "XXI",
+    topic: "El Concurso del Arco",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué hizo Penélope para iniciar el concurso del arco?",
+    choices: [
+      "Bajó el arco de la armería y lo colocó en el salón con las doce hachas",
+      "Envió al heraldo a avisar a los pretendientes",
+      "Pidió a Eumeo que alineara las hachas",
+      "Entregó el arco al pretendiente más anciano"
+    ],
+    answer: 0,
+    explanation: "Penélope subió a la armería, sacó el arco de Odiseo de su funda y las flechas, y bajó al salón donde ordenó colocar las doce hachas en fila antes de anunciar el concurso."
+  },
+  {
+    id: 102,
+    canto: "XXI",
+    topic: "El Concurso del Arco",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Quién fue el único que logró tensar el arco de Odiseo durante el concurso?",
+    answer: ["odiseo", "el mendigo"],
+    answerText: "Odiseo (disfrazado de mendigo)",
+    explanation: "Ningún pretendiente pudo tensar el arco. El mendigo (Odiseo) pidió intentarlo, fue insultado por los pretendientes, pero lo tensó con facilidad y disparó la flecha por las doce hachas."
+  },
+  {
+    id: 103,
+    canto: "XXI",
+    topic: "El Concurso del Arco",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿A quiénes reveló Odiseo su identidad justo antes de disparar en el concurso?",
+    choices: [
+      "A Penélope y Telémaco",
+      "Al porquero Eumeo y al mayoral Filetio",
+      "Solo a Eumeo",
+      "A los heraldos del palacio"
+    ],
+    answer: 1,
+    explanation: "Odiseo mostró su cicatriz al porquero Eumeo y al vaquero Filetio para ganarse su lealtad en la batalla que iba a desencadenarse tras disparar el arco."
+  },
+
+  // ════════════════════════════
+  //        CANTO XXII
+  // ════════════════════════════
+  {
+    id: 104,
+    canto: "XXII",
+    topic: "La Matanza de los Pretendientes",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿A quién atravesó Odiseo con su primera flecha para comenzar la matanza de los pretendientes?",
+    choices: ["Eurímaco", "Antínoo", "Anfínomo", "Ctesipo"],
+    answer: 1,
+    explanation: "Odiseo apuntó primero a Antínoo, el más soberbio de los pretendientes, que en ese momento bebía de una copa de oro. La flecha le atravesó el cuello."
+  },
+  {
+    id: 105,
+    canto: "XXII",
+    topic: "La Matanza de los Pretendientes",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Quiénes combatieron junto a Odiseo en la matanza de los pretendientes?",
+    choices: [
+      "Solo Telémaco",
+      "Telémaco, Eumeo el porquero y Filetio el boyero",
+      "Telémaco y varios heraldos",
+      "Atenea sola, tomando forma humana"
+    ],
+    answer: 1,
+    explanation: "Odiseo luchó junto a Telémaco, el fiel porquero Eumeo y el boyero Filetio. Atenea tomó la forma de Mentor para darles ánimos, pero dejó que los cuatro hombres realizaran el combate."
+  },
+  {
+    id: 106,
+    canto: "XXII",
+    topic: "La Matanza de los Pretendientes",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿A quiénes perdonó Odiseo la vida de entre los que estaban en el salón?",
+    choices: [
+      "A los pretendientes más jóvenes",
+      "Al aedo Femio y al heraldo Medonte",
+      "A los pretendientes que lo habían tratado menos mal",
+      "A nadie, mató a todos"
+    ],
+    answer: 1,
+    explanation: "Odiseo perdonó al aedo Femio, que cantaba obligado, y al heraldo Medonte, ya que ambos habían servido sinceramente a la familia y no habían participado de voluntad en las ofensas."
+  },
+  {
+    id: 107,
+    canto: "XXII",
+    topic: "La Matanza de los Pretendientes",
+    difficulty: "difícil",
+    type: "mcq",
+    prompt: "¿Cuál fue el destino de las sirvientas infieles que habían dormido con los pretendientes?",
+    choices: [
+      "Fueron enviadas al exilio",
+      "Fueron convertidas en esclavas del palacio",
+      "Telémaco las ahorcó con una cuerda de la nave en el patio",
+      "Penélope las perdonó tras el arrepentimiento"
+    ],
+    answer: 2,
+    explanation: "Telémaco colgó a las doce sirvientas infieles con una gruesa cuerda de barco tendida entre la sala y una columna del patio, como castigo por su traición."
+  },
+
+  // ════════════════════════════
+  //        CANTO XXIII
+  // ════════════════════════════
+  {
+    id: 108,
+    canto: "XXIII",
+    topic: "Reconocimiento de Penélope",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Por qué tardó Penélope en reconocer a Odiseo tras la matanza de los pretendientes?",
+    choices: [
+      "Porque estaba ciega de llanto",
+      "Por prudencia y desconfianza, temía que fuera un dios o un impostor",
+      "Porque Atenea la mantuvo dormida",
+      "Porque Odiseo aún llevaba el disfraz de mendigo"
+    ],
+    answer: 1,
+    explanation: "Penélope permaneció asombrada y no hablaba. La prudencia la contenía: debía asegurarse. Telémaco le reprochó su frialdad, pero Penélope decía conocer señas propias del esposo."
+  },
+  {
+    id: 109,
+    canto: "XXIII",
+    topic: "Reconocimiento de Penélope",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Qué prueba ideó Penélope para identificar definitivamente a Odiseo?",
+    choices: [
+      "Le pidió que recordara el nombre de su hijo",
+      "Le pidió que describiera la habitación secreta del tesoro",
+      "Ordenó mover el lecho nupcial fuera del dormitorio",
+      "Le mostró la cicatriz que ella misma le hizo de joven"
+    ],
+    answer: 2,
+    explanation: "Penélope ordenó 'mover' la cama nupcial. Odiseo respondió indignado que era imposible: él mismo la había construido alrededor de un olivo vivo. Solo él sabía ese secreto."
+  },
+  {
+    id: 110,
+    canto: "XXIII",
+    topic: "Reconocimiento de Penélope",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cuántos años en total había estado Odiseo fuera de Ítaca hasta su regreso definitivo?",
+    choices: ["Diez años", "Quince años", "Veinte años", "Veinticinco años"],
+    answer: 2,
+    explanation: "Diez años de guerra en Troya más diez años de peregrinaciones suman veinte años de ausencia. En el Canto XXIII Penélope y Odiseo se reconocen tras ese inmenso lapso."
+  },
+  {
+    id: 111,
+    canto: "XXIII",
+    topic: "Reconocimiento de Penélope",
+    difficulty: "difícil",
+    type: "truefalse",
+    prompt: "Fue Atenea quien retrasó el amanecer para dar más tiempo a Odiseo y Penélope en su noche de reencuentro.",
+    choices: ["Verdadero", "Falso"],
+    answer: 0,
+    explanation: "Verdadero. Atenea retuvo a la Aurora de oro durante más tiempo del habitual para que Odiseo y Penélope pudieran disfrutar de su noche de reencuentro y tener tiempo de contarse todo."
+  },
+
+  // ════════════════════════════
+  //        CANTO XXIV
+  // ════════════════════════════
+  {
+    id: 112,
+    canto: "XXIV",
+    topic: "Las Almas en el Hades",
+    difficulty: "básico",
+    type: "input",
+    prompt: "¿Qué dios condujo las sombras de los pretendientes muertos al reino de los muertos?",
+    answer: ["hermes"],
+    answerText: "Hermes",
+    explanation: "Hermes Citereida guió las almas chillantes de los pretendientes por los caminos del Hades, pasando el océano y la roca Léucade hasta los prados de asfódelos."
+  },
+  {
+    id: 113,
+    canto: "XXIV",
+    topic: "Las Almas en el Hades",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Con las sombras de qué dos grandes héroes se encontraron los pretendientes en el Hades?",
+    choices: [
+      "Heracles y Aquiles",
+      "Aquiles y Agamenón",
+      "Ayax y Patroclo",
+      "Héctor y Príamo"
+    ],
+    answer: 1,
+    explanation: "Las almas de los pretendientes se encontraron con Aquiles y Agamenón. Agamenón comentó el contraste entre su propia esposa traidora (Clitemnestra) y la fiel Penélope."
+  },
+  {
+    id: 114,
+    canto: "XXIV",
+    topic: "Laertes",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Cómo reconoció Laertes, padre de Odiseo, a su hijo cuando fue a visitarlo en la granja?",
+    choices: [
+      "Por la voz de Odiseo",
+      "Por la cicatriz del jabalí y por los árboles del huerto que Odiseo describió de su infancia",
+      "Porque se los dijo Atenea directamente",
+      "Por el anillo de sello que llevaba Odiseo"
+    ],
+    answer: 1,
+    explanation: "Odiseo mostró a su padre la cicatriz del jabalí y luego enumeró los trece perales, diez manzanos, cuarenta higueras y cincuenta viñas que Laertes le regaló de niño. Laertes lo abrazó llorando."
+  },
+  {
+    id: 115,
+    canto: "XXIV",
+    topic: "La Paz Final",
+    difficulty: "básico",
+    type: "mcq",
+    prompt: "¿Quiénes se levantaron en armas contra Odiseo al enterarse de la matanza de los pretendientes?",
+    choices: [
+      "Los nobles de Esparta y Pilos",
+      "Los familiares de los pretendientes muertos de Ítaca",
+      "Los siervos que servían a los pretendientes",
+      "Los marineros feacios"
+    ],
+    answer: 1,
+    explanation: "Los padres y hermanos de los pretendientes muertos formaron un grupo armado para vengar su muerte. Euplites, padre de Antínoo, lideró la revuelta."
+  },
+  {
+    id: 116,
+    canto: "XXIV",
+    topic: "La Paz Final",
+    difficulty: "medio",
+    type: "mcq",
+    prompt: "¿Cómo se estableció la paz definitiva en Ítaca al final de La Odisea?",
+    choices: [
+      "Odiseo firmó un tratado con los familiares de los pretendientes",
+      "Telémaco negoció el perdón a cambio de tributo",
+      "Zeus ordenó la paz con un trueno y Atenea la selló entre las partes",
+      "Los familiares de los pretendientes huyeron de Ítaca para siempre"
+    ],
+    answer: 2,
+    explanation: "Atenea, disfrazada de Mentor, detuvo el combate cuando las familias de los pretendientes arremetían. Zeus lanzó un rayo ante los pies de Atenea como señal y ella ordenó a ambos bandos deponer las armas."
+  }
+];
+
+// ── APP ──
+const questionCard   = document.getElementById("questionCard");
+const feedback       = document.getElementById("feedback");
+const progressText   = document.getElementById("progressText");
+const progressFill   = document.getElementById("progressFill");
+const checkBtn       = document.getElementById("checkBtn");
+const nextBtn        = document.getElementById("nextBtn");
+const showBtn        = document.getElementById("showBtn");
+const shuffleBtn     = document.getElementById("shuffleBtn");
+const cantoSelect    = document.getElementById("cantoSelect");
+const topicSelect    = document.getElementById("topicSelect");
+const countSelect    = document.getElementById("countSelect");
+const difficultySelect = document.getElementById("difficultySelect");
+const summary        = document.getElementById("summary");
+const scoreText      = document.getElementById("scoreText");
+const weakTopics     = document.getElementById("weakTopics");
+const restartBtn     = document.getElementById("restartBtn");
+
+let pool = [...QUESTION_BANK];
+let activeQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let mistakes = {};
+
+const normalize = v => v.toString().trim().toLowerCase();
+
+// Roman numeral sort order for cantos
+const cantoOrder = ["I","II","III","IV","V","VI","VII","VIII","IX","X",
+  "XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX",
+  "XXI","XXII","XXIII","XXIV"];
+
+// Populate filters
+const cantos      = [...new Set(QUESTION_BANK.map(q => q.canto))]
+  .sort((a, b) => cantoOrder.indexOf(a) - cantoOrder.indexOf(b));
+const topics      = [...new Set(QUESTION_BANK.map(q => q.topic))].sort();
+const difficulties = [...new Set(QUESTION_BANK.map(q => q.difficulty))];
+
+cantos.forEach(c => {
+  const o = document.createElement("option"); o.value = c; o.textContent = `Canto ${c}`;
+  cantoSelect.appendChild(o);
+});
+topics.forEach(t => {
+  const o = document.createElement("option"); o.value = t; o.textContent = t;
+  topicSelect.appendChild(o);
+});
+difficulties.forEach(d => {
+  const o = document.createElement("option"); o.value = d; o.textContent = d;
+  difficultySelect.appendChild(o);
+});
+[5, 10, 15, 20, 30].forEach(n => {
+  if (n <= QUESTION_BANK.length) {
+    const o = document.createElement("option"); o.value = n; o.textContent = n;
+    countSelect.appendChild(o);
+  }
+});
+
+// When canto changes, update topic options to match
+cantoSelect.addEventListener("change", () => {
+  const canto = cantoSelect.value;
+  topicSelect.innerHTML = '<option value="all">Todos</option>';
+  const filtered = canto === "all" ? QUESTION_BANK : QUESTION_BANK.filter(q => q.canto === canto);
+  const filteredTopics = [...new Set(filtered.map(q => q.topic))].sort();
+  filteredTopics.forEach(t => {
+    const o = document.createElement("option"); o.value = t; o.textContent = t;
+    topicSelect.appendChild(o);
+  });
+  buildActiveQuestions();
+});
+
+const shuffle = arr => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const buildActiveQuestions = () => {
+  const canto      = cantoSelect.value;
+  const topic      = topicSelect.value;
+  const difficulty = difficultySelect.value;
+  const countValue = countSelect.value;
+  let filtered = [...pool];
+  if (canto !== "all")      filtered = filtered.filter(q => q.canto === canto);
+  if (topic !== "all")      filtered = filtered.filter(q => q.topic === topic);
+  if (difficulty !== "all") filtered = filtered.filter(q => q.difficulty === difficulty);
+  if (countValue !== "all") filtered = filtered.slice(0, Number(countValue));
+  activeQuestions = filtered.length ? filtered : [...pool];
+  currentIndex = 0; score = 0; answered = false; mistakes = {};
+  summary.hidden = true;
+  renderQuestion();
+};
+
+const renderQuestion = () => {
+  const total = activeQuestions.length;
+  if (!total) return;
+  const q = activeQuestions[currentIndex];
+  answered = false;
+  nextBtn.disabled = true;
+  feedback.className = "feedback";
+  feedback.textContent = "";
+  feedback.style.display = "none";
+  progressText.textContent = `Pregunta ${currentIndex + 1} de ${total}`;
+  progressFill.style.width = `${((currentIndex + 1) / total) * 100}%`;
+  const meta = `<div class="meta"><span>Canto ${q.canto}</span><span>·</span><span>${q.topic}</span><span>·</span><span>${q.difficulty}</span></div>`;
+  let inputBlock = "";
+  if (q.type === "mcq" || q.type === "truefalse") {
+    inputBlock = `<div class="options">${q.choices.map((c, i) => `
+      <label class="option">
+        <input type="radio" name="answer" value="${i}" />
+        <span>${c}</span>
+      </label>`).join("")}</div>`;
+  } else if (q.type === "input") {
+    inputBlock = `<input class="input-answer" type="text" id="textAnswer" placeholder="Escribe tu respuesta" autocomplete="off" />`;
+  }
+  questionCard.innerHTML = `${meta}<h3>${q.prompt}</h3>${inputBlock}`;
+};
+
+const getUserAnswer = () => {
+  const q = activeQuestions[currentIndex];
+  if (q.type === "mcq" || q.type === "truefalse") {
+    const sel = questionCard.querySelector("input[name='answer']:checked");
+    return sel ? Number(sel.value) : null;
+  }
+  if (q.type === "input") {
+    const inp = document.getElementById("textAnswer");
+    return inp ? inp.value : "";
+  }
+  return null;
+};
+
+const evaluateAnswer = (forceShow = false) => {
+  const q = activeQuestions[currentIndex];
+  const userAnswer = getUserAnswer();
+  if (!forceShow) {
+    if (q.type === "input" && !userAnswer.trim()) {
+      feedback.className = "feedback error";
+      feedback.textContent = "Escribe una respuesta antes de revisar.";
+      feedback.style.display = "block";
+      return;
+    }
+    if ((q.type === "mcq" || q.type === "truefalse") && userAnswer === null) {
+      feedback.className = "feedback error";
+      feedback.textContent = "Selecciona una opción antes de revisar.";
+      feedback.style.display = "block";
+      return;
+    }
+  }
+  let isCorrect = false;
+  if (!forceShow) {
+    if (q.type === "mcq" || q.type === "truefalse") {
+      isCorrect = userAnswer === q.answer;
+    } else if (q.type === "input") {
+      const accepted = Array.isArray(q.answer) ? q.answer : [q.answer];
+      isCorrect = accepted.map(normalize).includes(normalize(userAnswer));
+    }
+  }
+  const correctText = (q.type === "mcq" || q.type === "truefalse")
+    ? q.choices[q.answer]
+    : q.answerText || q.answer;
+  feedback.className = `feedback ${isCorrect ? "success" : "error"}`;
+  feedback.innerHTML = `
+    <strong>${isCorrect ? "¡Correcto!" : forceShow ? "Respuesta correcta" : "Respuesta incorrecta"}</strong><br />
+    <span>Respuesta correcta: ${correctText}</span>
+    <small>${q.explanation}</small>
+  `;
+  feedback.style.display = "block";
+  if (!answered) {
+    if (isCorrect) score += 1;
+    else mistakes[q.topic] = (mistakes[q.topic] || 0) + 1;
+  }
+  answered = true;
+  nextBtn.disabled = false;
+};
+
+const goNext = () => {
+  if (currentIndex < activeQuestions.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  } else {
+    showSummary();
+  }
+};
+
+const showSummary = () => {
+  summary.hidden = false;
+  scoreText.textContent = `${score}/${activeQuestions.length}`;
+  weakTopics.innerHTML = "";
+  const entries = Object.entries(mistakes);
+  if (!entries.length) {
+    weakTopics.innerHTML = "<li>Sin temas críticos. ¡Buen trabajo!</li>";
+  } else {
+    entries.sort((a, b) => b[1] - a[1]).forEach(([topic, count]) => {
+      const li = document.createElement("li");
+      li.textContent = `${topic} (${count} error${count > 1 ? "es" : ""})`;
+      weakTopics.appendChild(li);
+    });
+  }
+  summary.scrollIntoView({ behavior: "smooth" });
+};
+
+// Events
+checkBtn.addEventListener("click", () => evaluateAnswer(false));
+showBtn.addEventListener("click",  () => evaluateAnswer(true));
+nextBtn.addEventListener("click",  goNext);
+restartBtn.addEventListener("click", buildActiveQuestions);
+shuffleBtn.addEventListener("click", () => {
+  pool = shuffle(pool);
+  buildActiveQuestions();
+});
+topicSelect.addEventListener("change", buildActiveQuestions);
+countSelect.addEventListener("change", buildActiveQuestions);
+difficultySelect.addEventListener("change", buildActiveQuestions);
+
+// Init
+buildActiveQuestions();
+</script>
+</body>
+</html>
